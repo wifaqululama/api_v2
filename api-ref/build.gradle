@@ -1,0 +1,41 @@
+plugins {
+    id 'org.springframework.boot' version '2.6.0'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'uk.co.wifaqululama'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+task buildDocs {
+    doFirst {
+        def sout = new StringBuilder(), serr = new StringBuilder()
+        def proc = 'mkdocs build'.execute()
+        proc.consumeProcessOutput(sout, serr)
+        proc.waitForOrKill(1000)
+        println "out> $sout\nerr> $serr"
+
+        copy {
+            from 'site'
+            into 'src/main/resources/static'
+        }
+    }
+}
+
+compileJava {
+    dependsOn buildDocs
+}
+
+test {
+    useJUnitPlatform()
+}
