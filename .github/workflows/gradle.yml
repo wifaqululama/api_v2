@@ -24,8 +24,8 @@ jobs:
         cache: gradle
     - name: Install Required Applications
       run: |
-        apt install pip
-        pip install mkdocs mkdocs-material
+        sudo apt install pip
+        sudp pip install mkdocs mkdocs-material
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
     - name: Build with Gradle
