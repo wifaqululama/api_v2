@@ -20,15 +20,10 @@ dependencies {
 task buildDocs {
     doFirst {
         def sout = new StringBuilder(), serr = new StringBuilder()
-        def proc = "mkdocs build".execute()
+        def proc = "mkdocs build -c -f ${project.projectDir.toString()}/mkdocs.yml -d ${project.projectDir.toString()}/src/main/resources/static".execute()
         proc.consumeProcessOutput(sout, serr)
         proc.waitForOrKill(1000)
         println "out> $sout\nerr> $serr"
-
-        copy {
-            from "${project.projectDir.toString()}site"
-            into "${project.projectDir.toString()}src/main/resources/static"
-        }
     }
 }
 
