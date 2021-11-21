@@ -1,4 +1,4 @@
-package uk.co.wifaqululama.apiref;
+package uk.co.wifaqululama.docs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
